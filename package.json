@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "test": "",
-    "dev": "nodemon -e ts -L --exec \"tsc && node ./dist/app.js\" || exit 1", 
+    "dev": "nodemon -e ts -L --exec \"tsc && node ./dist/app.js\" || exit 1",
     "build": "tsc"
   },
   "author": "9akashnp8",
   "license": "ISC",
   "dependencies": {
+    "@supabase/supabase-js": "^2.38.4",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2"
   },
   "devDependencies": {

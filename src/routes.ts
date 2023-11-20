@@ -1,6 +1,6 @@
 import express from 'express';
-import { listGroups } from './controllers/group.js';
+import { listGroupsController } from './controllers/group.js';
 
 export const router = express.Router()
 
-router.get('/group', listGroups)
+router.get('/group', listGroupsController)
