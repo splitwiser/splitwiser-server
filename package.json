@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "",
-    "dev": "nodemon -e ts -L --exec \"tsc && node ./dist/app.js\"", 
+    "dev": "nodemon -e ts -L --exec \"tsc && node ./dist/app.js\" || exit 1", 
     "build": "tsc"
   },
   "author": "9akashnp8",
