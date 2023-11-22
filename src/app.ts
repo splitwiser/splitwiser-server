@@ -1,11 +1,11 @@
-import Express from 'express';
+import Express from "express";
 
-import { router } from './routes.js';
+import { router } from "./routes.js";
 
-const app = Express()
+const app = Express();
 
-app.use(router)
+app.use(router);
 
 app.listen(3000, () => {
-    console.log("Running at port 3000")
-})
+  console.log("Running at port 3000"); // eslint-disable-line no-console
+});
