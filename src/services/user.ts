@@ -8,7 +8,7 @@ export async function listFriends(userId: string) {
   return data;
 }
 
-export async function listFriendsTransaction(payerId: string, payeeId: string) {
+export async function listExpensesWithFriend(payerId: string, payeeId: string) {
   const { data, error } = await supabase.rpc("get_friends_transactions", {
     payerid: payerId,
     payeeid: payeeId,
@@ -26,7 +26,7 @@ export async function getPayerPayeeBalance(payerId: string, payeeId: string) {
   return data;
 }
 
-export async function getFriendsBalance(userId: string, friendId: string) {
+export async function getBalanceWithFriend(userId: string, friendId: string) {
   const [paid, due] = await Promise.all([
     getPayerPayeeBalance(userId, friendId),
     getPayerPayeeBalance(friendId, userId),
