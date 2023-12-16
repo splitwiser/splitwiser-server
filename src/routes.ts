@@ -4,6 +4,7 @@ import { listGroupsController } from "./controllers/group.js";
 import listFriendsController from "./controllers/friends/listFriends/index.js";
 import { listExpensesWithFriendController } from "./controllers/friends/listExpensesWithFriend/index.js";
 import { getBalanceWithFriendController } from "./controllers/friends/getBalanceWithFriend/index.js";
+import { settleUpController } from "./controllers/settleUp/index.js";
 
 export const router = express.Router();
 
@@ -17,3 +18,4 @@ router.get(
   "/users/:userId/friends/:friendId/balance",
   getBalanceWithFriendController,
 );
+router.post("/users/:userId/friends/:friendId/settle", settleUpController);
