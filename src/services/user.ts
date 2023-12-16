@@ -1,13 +1,5 @@
 import { supabase } from "./supabase.js";
 
-export async function listFriends(userId: string) {
-  const { data, error } = await supabase.rpc("get_user_friends", {
-    userid: userId,
-  });
-  if (error) return error;
-  return data;
-}
-
 export async function listExpensesWithFriend(payerId: string, payeeId: string) {
   const { data, error } = await supabase.rpc("get_friends_transactions", {
     payerid: payerId,
