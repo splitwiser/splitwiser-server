@@ -6,7 +6,7 @@ import versioningMiddleware from "./middlewares/versioning.js";
 const app = Express();
 
 app.use(versioningMiddleware);
-
+app.use(Express.json());
 app.use(router);
 
 app.listen(3000, () => {

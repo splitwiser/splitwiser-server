@@ -1,7 +1,7 @@
 import { supabase } from "./supabase.js";
 
 export async function listExpensesWithFriend(payerId: string, payeeId: string) {
-  const { data, error } = await supabase.rpc("get_friends_transactions", {
+  const { data, error } = await supabase.rpc("get_transactions", {
     payerid: payerId,
     payeeid: payeeId,
   });
