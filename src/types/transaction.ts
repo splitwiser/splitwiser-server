@@ -10,4 +10,10 @@ export type TxnPayerPayeeBody = {
   splitAmount: number;
 };
 
-export type ExpenseBody = Omit<TxnBody & TxnPayerPayeeBody, "transactionId">;
+export type ExpenseBody = {
+  name: string;
+  amount: number;
+  payerId: number;
+  payeeIds: number[];
+  splitAmount: number;
+};

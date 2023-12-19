@@ -108,22 +108,28 @@ export async function createTxnPayerPayeeRecord(details: TxnPayerPayeeBody) {
  * Create an expense. Involves creation of both "Transaction" and "Transaction Payer
  * Payee" record.
  */
-export async function createExpense(
-  details: ExpenseBody,
-): Promise<{ id: string } | null> {
+export async function createExpense(details: ExpenseBody) {
   const txnBody = { name: details.name, amount: details.amount };
   const data = await createTxn(txnBody);
   const txnId = data && data[0]?.id;
   if (txnId) {
-    const txnPayerPayeeBody = {
-      transactionId: txnId,
-      payerId: details.payerId,
-      payeeId: details.payeeId,
-      splitAmount: details.amount,
-    };
-    const result = await createTxnPayerPayeeRecord(txnPayerPayeeBody);
-    const id = result && result[0]?.id;
-    return { id };
+    const txnPayerPayeePromises: any[] = []; // eslint-disable-line @typescript-eslint/no-explicit-any
+    const payeeIds = [...details.payeeIds, details.payerId];
+    const splitAmount = Number((details.amount / payeeIds.length).toFixed(2));
+    payeeIds.forEach((payee) => {
+      txnPayerPayeePromises.push(
+        createTxnPayerPayeeRecord({
+          transactionId: txnId,
+          payerId: details.payerId,
+          payeeId: payee,
+          splitAmount,
+        }),
+      );
+    });
+    const result = await Promise.all(txnPayerPayeePromises);
+    if (result.length === payeeIds.length) {
+      return result;
+    }
   }
   return null;
 }
@@ -145,7 +151,7 @@ export async function settleUp(
     name: `${userId} Settle up ${friendId}`,
     amount,
     payerId: userId,
-    payeeId: friendId,
+    payeeIds: [friendId],
     splitAmount: amount,
   };
   const result = await createExpense(expenseDetails);
